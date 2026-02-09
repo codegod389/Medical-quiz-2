@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neurophysiology 2: Eye Part 1 - Comprehensive Quiz</title>
+    <style>
+        :root {
+            --primary: #2d3748;
+            --secondary: #4a5568;
+            --accent: #718096;
+            --light: #f7fafc;
+            --dark: #1a202c;
+            --success: #38a169;
+            --warning: #d69e2e;
+            --danger: #e53e3e;
+            --retina-color: #4299e1;
+            --cornea-color: #9f7aea;
+            --lens-color: #48bb78;
+            --neural-color: #ed8936;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(rgba(45, 55, 72, 0.9), rgba(74, 85, 104, 0.9)), 
+                        url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80') center/cover fixed;
+            color: #2d3748;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(135deg, var(--primary), var(--retina-color));
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .eye-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 3rem;
+            opacity: 0.2;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .difficulty-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--retina-color), var(--lens-color));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 1rem;
+            margin-top: 15px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .quiz-info {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-item {
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .info-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .info-label {
+            font-size: 0.9rem;
+            color: #4a5568;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .quiz-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .questions-section {
+            flex: 2;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.97);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        
+        .answer-section {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.97);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+            display: none;
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        
+        .answer-section.visible {
+            display: block;
+        }
+        
+        .question {
+            margin-bottom: 35px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #e2e8f0;
+            position: relative;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-left: 5px;
+        }
+        
+        .question-number::before {
+            content: "Q";
+            background: linear-gradient(135deg, var(--primary), var(--retina-color));
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .question-text {
+            margin-bottom: 25px;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            background: linear-gradient(to right, var(--light), #f7fafc);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid var(--accent);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .anatomy-note {
+            background: linear-gradient(to right, #ebf8ff, #bee3f8);
+            border-left: 5px solid var(--retina-color);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .refraction-note {
+            background: linear-gradient(to right, #faf5ff, #e9d8fd);
+            border-left: 5px solid var(--cornea-color);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .accommodation-note {
+            background: linear-gradient(to right, #f0fff4, #c6f6d5);
+            border-left: 5px solid var(--lens-color);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .processing-note {
+            background: linear-gradient(to right, #fffaf0, #feebc8);
+            border-left: 5px solid var(--neural-color);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .clinical-note {
+            background: linear-gradient(to right, #fff5f5, #fed7d7);
+            border-left: 5px solid var(--danger);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            font-style: italic;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .option {
+            padding: 18px 25px;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.08rem;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .option::before {
+            content: attr(data-letter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 40px;
+            background: #edf2f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--dark);
+            border-right: 2px solid #cbd5e0;
+        }
+        
+        .option-content {
+            margin-left: 45px;
+        }
+        
+        .option:hover {
+            background-color: #f7fafc;
+            border-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .option.selected {
+            background-color: #e6fffa;
+            border-color: var(--secondary);
+            box-shadow: 0 4px 12px rgba(49, 130, 206, 0.15);
+        }
+        
+        .option.correct {
+            background-color: #f0fff4;
+            border-color: var(--success);
+            box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+        }
+        
+        .option.incorrect {
+            background-color: #fff5f5;
+            border-color: var(--danger);
+            box-shadow: 0 4px 12px rgba(229, 62, 62, 0.15);
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 20px;
+        }
+        
+        button {
+            padding: 18px 35px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.15rem;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, var(--retina-color), var(--primary));
+            color: white;
+            flex: 2;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        
+        .reset-btn {
+            background: linear-gradient(135deg, #ffffff, #f7fafc);
+            color: var(--dark);
+            flex: 1;
+            border: 2px solid #cbd5e0;
+        }
+        
+        .reset-btn:hover {
+            background: white;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .results-section {
+            margin-top: 50px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+            display: none;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        
+        .score-display {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--primary), var(--retina-color));
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            margin: 15px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 40px 0;
+            gap: 25px;
+        }
+        
+        .stat-box {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            flex: 1;
+            transition: transform 0.3s;
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .passed .stat-value {
+            color: var(--success);
+        }
+        
+        .failed .stat-value {
+            color: var(--danger);
+        }
+        
+        .attempted .stat-value {
+            color: var(--secondary);
+        }
+        
+        .answer-bank {
+            margin-top: 50px;
+        }
+        
+        .answer-item {
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            background: white;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+        }
+        
+        .answer-correct {
+            color: var(--success);
+            font-weight: bold;
+            display: inline-block;
+            padding: 5px 10px;
+            background: #f0fff4;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+        
+        .answer-incorrect {
+            color: var(--danger);
+            font-weight: bold;
+            display: inline-block;
+            padding: 5px 10px;
+            background: #fff5f5;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 5px;
+            margin: 25px 0;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--retina-color), var(--primary));
+            transition: width 0.5s;
+        }
+        
+        @media (max-width: 1200px) {
+            .quiz-container {
+                flex-direction: column;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+            }
+            
+            h1 {
+                font-size: 1.7rem;
+            }
+            
+            .score-value {
+                font-size: 2.5rem;
+            }
+            
+            .question-text {
+                font-size: 1.1rem;
+                padding: 15px;
+            }
+            
+            .option {
+                padding: 15px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="eye-icon">👁️</div>
+            <h1>Neurophysiology 2: Eye Part 1 - Comprehensive Quiz</h1>
+            <p class="subtitle">70 Questions Covering Eye Structure, Refraction, Accommodation, Visual Processing & Clinical Defects</p>
+            <div class="difficulty-badge">ADVANCED VISUAL NEUROSCIENCE</div>
+        </header>
+        
+        <div class="quiz-info">
+            <div class="info-item">
+                <div class="info-value">70</div>
+                <div class="info-label">Questions</div>
+            </div>
+            <div class="info-item">
+                <div class="info-value">5</div>
+                <div class="info-label">Major Topics</div>
+            </div>
+            <div class="info-item">
+                <div class="info-value">Refraction</div>
+                <div class="info-label">& Accommodation</div>
+            </div>
+            <div class="info-item">
+                <div class="info-value">Clinical</div>
+                <div class="info-label">Defects</div>
+            </div>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress" id="progress-bar" style="width: 0%"></div>
+        </div>
+        
+        <div class="quiz-container">
+            <div class="questions-section" id="questions-section">
+                <!-- Questions will be dynamically inserted here -->
+            </div>
+            
+            <div class="answer-section" id="answer-section">
+                <h2>Comprehensive Answer Bank</h2>
+                <p>Detailed explanations based on Kandel's Principles of Neural Science and Guyton's Medical Physiology</p>
+                <div id="answer-bank">
+                    <!-- Answers will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="reset-btn" id="reset-btn">Reset Quiz</button>
+            <button class="submit-btn" id="submit-btn">Submit Answers</button>
+        </div>
+        
+        <div class="results-section" id="results-section">
+            <div class="score-display">
+                <h2>Your Visual Neuroscience Knowledge Score</h2>
+                <div class="score-value" id="score-value">0/70</div>
+                <p>Comprehensive Coverage of Eye Anatomy, Physiology & Visual Processing</p>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-box attempted">
+                    <div class="stat-value" id="attempted-value">0</div>
+                    <div class="stat-label">Questions Attempted</div>
+                </div>
+                <div class="stat-box passed">
+                    <div class="stat-value" id="passed-value">0</div>
+                    <div class="stat-label">Questions Passed</div>
+                </div>
+                <div class="stat-box failed">
+                    <div class="stat-value" id="failed-value">0</div>
+                    <div class="stat-label">Questions Failed</div>
+                </div>
+            </div>
+            
+            <div class="answer-bank">
+                <h3>Detailed Explanations</h3>
+                <div id="detailed-answers">
+                    <!-- Detailed answers will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 70 Comprehensive questions on Eye Anatomy and Physiology
+        const quizData = [
+            // Questions 1-20: Structure of the Eye
+            {
+                question: "The outermost layer of the eye is the:",
+                options: [
+                    "Retina",
+                    "Choroid",
+                    "Sclera",
+                    "Cornea"
+                ],
+                correct: 2,
+                explanation: "The sclera forms the tough, white, protective outer layer covering 5/6 of the eye posteriorly, continuous with the cornea anteriorly."
+            },
+            {
+                question: "The fovea centralis contains primarily:",
+                options: [
+                    "Rods only",
+                    "Cones only",
+                    "Both rods and cones equally",
+                    "No photoreceptors"
+                ],
+                correct: 1,
+                explanation: "The fovea centralis contains only cone photoreceptors (approximately 200,000/mm²), providing maximum visual acuity for daylight and color vision."
+            },
+            {
+                question: "The avascular structure of the eye that provides most refractive power is the:",
+                options: [
+                    "Lens",
+                    "Cornea",
+                    "Vitreous humor",
+                    "Aqueous humor"
+                ],
+                correct: 1,
+                explanation: "The cornea provides approximately 43 diopters (2/3) of the eye's total refractive power due to its curved air-tissue interface."
+            },
+            {
+                question: "The ciliary body functions include all EXCEPT:",
+                options: [
+                    "Aqueous humor production",
+                    "Lens accommodation",
+                    "Photoreception",
+                    "Zonule attachment"
+                ],
+                correct: 2,
+                explanation: "The ciliary body produces aqueous humor (pars plicata), controls accommodation via ciliary muscle, and provides attachment for zonular fibers. Photoreception occurs in the retina."
+            },
+            {
+                question: "The ora serrata marks the boundary between:",
+                options: [
+                    "Cornea and sclera",
+                    "Retina and optic nerve",
+                    "Neural retina and ciliary body",
+                    "Iris and ciliary body"
+                ],
+                correct: 2,
+                explanation: "The ora serrata is the serrated boundary between the neural retina and the ciliary body, located about 8mm from the limbus."
+            },
+            {
+                question: "The blind spot corresponds to the:",
+                options: [
+                    "Fovea centralis",
+                    "Optic disc",
+                    "Macula lutea",
+                    "Ora serrata"
+                ],
+                correct: 1,
+                explanation: "The optic disc (papilla) contains no photoreceptors, creating the physiological blind spot, located 15° temporally to fixation."
+            },
+            {
+                question: "Bruch's membrane is located between the:",
+                options: [
+                    "Choroid and RPE",
+                    "RPE and photoreceptors",
+                    "Photoreceptors and bipolar cells",
+                    "Sclera and choroid"
+                ],
+                correct: 0,
+                explanation: "Bruch's membrane is a pentalaminar structure separating the retinal pigment epithelium from the choroidal capillaries."
+            },
+            {
+                question: "The canal of Schlemm drains:",
+                options: [
+                    "Aqueous humor",
+                    "Vitreous humor",
+                    "Tears",
+                    "Blood from choroid"
+                ],
+                correct: 0,
+                explanation: "The canal of Schlemm is a circular lymphatic-like vessel at the corneoscleral junction that drains aqueous humor from the anterior chamber."
+            },
+            {
+                question: "The iris contains two muscles: sphincter pupillae (parasympathetic) and:",
+                options: [
+                    "Ciliary muscle",
+                    "Dilator pupillae (sympathetic)",
+                    "Orbicularis oculi",
+                    "Levator palpebrae"
+                ],
+                correct: 1,
+                explanation: "The iris contains sphincter pupillae (circular, M3 receptors, CN III) and dilator pupillae (radial, α1 receptors, sympathetic from T1)."
+            },
+            {
+                question: "The retinal layers in order from choroid to vitreous are:",
+                options: [
+                    "RPE → Photoreceptors → Bipolar → Ganglion",
+                    "Ganglion → Bipolar → Photoreceptors → RPE",
+                    "Photoreceptors → RPE → Bipolar → Ganglion",
+                    "RPE → Bipolar → Photoreceptors → Ganglion"
+                ],
+                correct: 0,
+                explanation: "Retinal layers: RPE → photoreceptors (rods/cones) → outer limiting membrane → outer nuclear → outer plexiform → inner nuclear → inner plexiform → ganglion → nerve fiber → inner limiting membrane."
+            },
+            {
+                question: "The macula lutea contains:",
+                options: [
+                    "Xanthophyll pigments (lutein, zeaxanthin)",
+                    "Melanin only",
+                    "Hemoglobin",
+                    "Lipofuscin"
+                ],
+                correct: 0,
+                explanation: "The macula lutea (yellow spot) contains xanthophyll pigments (lutein, zeaxanthin) that absorb blue light and act as antioxidants."
+            },
+            {
+                question: "The suspensory ligaments (zonules of Zinn) connect the:",
+                options: [
+                    "Lens to ciliary body",
+                    "Iris to cornea",
+                    "Retina to choroid",
+                    "Sclera to extraocular muscles"
+                ],
+                correct: 0,
+                explanation: "Zonular fibers connect the lens capsule to the ciliary processes, transmitting tension changes during accommodation."
+            },
+            {
+                question: "The blood-aqueous barrier is formed by:",
+                options: [
+                    "Tight junctions between corneal endothelial cells",
+                    "Non-pigmented ciliary epithelium tight junctions",
+                    "Retinal pigment epithelium",
+                    "All of the above"
+                ],
+                correct: 1,
+                explanation: "The blood-aqueous barrier is primarily formed by tight junctions between non-pigmented ciliary epithelial cells, preventing plasma protein entry into aqueous humor."
+            },
+            {
+                question: "The visual pigment in rods is:",
+                options: [
+                    "Iodopsin",
+                    "Rhodopsin",
+                    "Melanopsin",
+                    "Cyanopsin"
+                ],
+                correct: 1,
+                explanation: "Rods contain rhodopsin (opsin + 11-cis-retinal), maximally sensitive at 498 nm (blue-green), providing scotopic (dim light) vision."
+            },
+            {
+                question: "Cones contain different opsins for color vision:",
+                options: [
+                    "Red (560 nm), Green (530 nm), Blue (420 nm)",
+                    "Red (700 nm), Green (550 nm), Blue (450 nm)",
+                    "Yellow (580 nm), Blue (480 nm), UV (360 nm)",
+                    "All cones have the same opsin"
+                ],
+                correct: 0,
+                explanation: "Cones contain: L-cones (red, λmax ~560 nm), M-cones (green, ~530 nm), S-cones (blue, ~420 nm), encoded by genes on X chromosome (L/M) and chromosome 7 (S)."
+            },
+            {
+                question: "The anterior chamber angle structures include all EXCEPT:",
+                options: [
+                    "Trabecular meshwork",
+                    "Canal of Schlemm",
+                    "Iris root",
+                    "Optic disc"
+                ],
+                correct: 3,
+                explanation: "Anterior chamber angle structures: Schwalbe's line, trabecular meshwork, scleral spur, ciliary body band, iris root. Optic disc is posterior."
+            },
+            {
+                question: "The vitreous body is composed mainly of:",
+                options: [
+                    "Water (99%) and hyaluronic acid",
+                    "Collagen and elastin",
+                    "Aqueous humor",
+                    "Mucopolysaccharides only"
+                ],
+                correct: 0,
+                explanation: "The vitreous body is 99% water with hyaluronic acid and a fine collagen network, maintaining ocular shape and transparency."
+            },
+            {
+                question: "The limbus is the transition zone between:",
+                options: [
+                    "Cornea and sclera",
+                    "Iris and ciliary body",
+                    "Retina and choroid",
+                    "Lens and vitreous"
+                ],
+                correct: 0,
+                explanation: "The limbus is the 1.5-2.0 mm transition zone between transparent cornea and opaque sclera, containing stem cells for corneal epithelium."
+            },
+            {
+                question: "The uveal tract consists of:",
+                options: [
+                    "Cornea, sclera, conjunctiva",
+                    "Iris, ciliary body, choroid",
+                    "Retina, optic nerve, vitreous",
+                    "Lens, zonules, aqueous"
+                ],
+                correct: 1,
+                explanation: "The uveal tract (vascular layer) includes iris (anterior), ciliary body (intermediate), and choroid (posterior)."
+            },
+            {
+                question: "The retinal ganglion cells that project to the suprachiasmatic nucleus contain:",
+                options: [
+                    "Rhodopsin",
+                    "Melanopsin",
+                    "Iodopsin",
+                    "Cyanopsin"
+                ],
+                correct: 1,
+                explanation: "Intrinsically photosensitive retinal ganglion cells (ipRGCs) contain melanopsin and project to the suprachiasmatic nucleus for circadian rhythm entrainment."
+            },
+
+            // Questions 21-35: Refraction of Light and Refractive Errors
+            {
+                question: "The refractive power of the eye is approximately:",
+                options: [
+                    "30 diopters at rest",
+                    "43 diopters at rest",
+                    "60 diopters at rest",
+                    "Variable, 20-80 diopters"
+                ],
+                correct: 1,
+                explanation: "Total refractive power: cornea ~43D (2/3), lens ~20D (1/3) at rest, total ~60D with accommodation. Diopter = 1/focal length (meters)."
+            },
+            {
+                question: "Emmetropia refers to:",
+                options: [
+                    "Normal vision without refractive error",
+                    "Nearsightedness",
+                    "Farsightedness",
+                    "Astigmatism"
+                ],
+                correct: 0,
+                explanation: "Emmetropia: parallel light rays focus precisely on retina with accommodation relaxed. Prevalence decreases with age."
+            },
+            {
+                question: "Myopia is caused by:",
+                options: [
+                    "Eyeball too short",
+                    "Eyeball too long",
+                    "Cornea too flat",
+                    "Lens too weak"
+                ],
+                correct: 1,
+                explanation: "Myopia (nearsightedness): eyeball too long (axial myopia) or refractive power too strong, image focuses in front of retina. Corrected with concave (-) lenses."
+            },
+            {
+                question: "Hyperopia is typically corrected with:",
+                options: [
+                    "Concave (minus) lenses",
+                    "Convex (plus) lenses",
+                    "Cylindrical lenses",
+                    "No correction needed"
+                ],
+                correct: 1,
+                explanation: "Hyperopia (farsightedness): eyeball too short or refractive power too weak, image focuses behind retina. Corrected with convex (+) lenses."
+            },
+            {
+                question: "Astigmatism results from:",
+                options: [
+                    "Spherical refractive surfaces",
+                    "Non-spherical refractive surfaces",
+                    "Pupil asymmetry",
+                    "Retinal irregularity"
+                ],
+                correct: 1,
+                explanation: "Astigmatism: cornea/lens has different curvature in different meridians, causing focal lines instead of point. Regular astigmatism corrected with cylindrical lenses."
+            },
+            {
+                question: "The Snellen chart measures:",
+                options: [
+                    "Color vision",
+                    "Contrast sensitivity",
+                    "Visual acuity",
+                    "Visual field"
+                ],
+                correct: 2,
+                explanation: "Snellen acuity: 20/20 = can see at 20 ft what normal eye sees at 20 ft. 20/200 = legal blindness (sees at 20 ft what normal sees at 200 ft)."
+            },
+            {
+                question: "Presbyopia is due to:",
+                options: [
+                    "Corneal flattening",
+                    "Lens sclerosis and decreased elasticity",
+                    "Retinal degeneration",
+                    "Ciliary muscle weakness"
+                ],
+                correct: 1,
+                explanation: "Presbyopia (after 40-45 years): lens fibers continuously produced, lens hardens (sclerosis), loses elasticity, decreasing accommodation amplitude."
+            },
+            {
+                question: "The near point of accommodation in a young adult is approximately:",
+                options: [
+                    "5 cm",
+                    "10 cm",
+                    "25 cm",
+                    "50 cm"
+                ],
+                correct: 1,
+                explanation: "Near point (punctum proximum): closest point of clear vision with maximum accommodation. Young adult: ~10 cm, decreases with age (presbyopia)."
+            },
+            {
+                question: "The far point of accommodation (punctum remotum) in emmetropia is:",
+                options: [
+                    "25 cm",
+                    "1 meter",
+                    "6 meters (optical infinity)",
+                    "10 meters"
+                ],
+                correct: 2,
+                explanation: "Far point: farthest point of clear vision with accommodation relaxed. Emmetropes: optical infinity (~6m). Myopes: finite distance closer."
+            },
+            {
+                question: "Anisometropia refers to:",
+                options: [
+                    "Equal refraction in both eyes",
+                    "Different refraction between eyes",
+                    "Absence of refraction",
+                    "Variable refraction"
+                ],
+                correct: 1,
+                explanation: "Anisometropia: >1D difference in refraction between eyes, can cause amblyopia if uncorrected in childhood due to cortical suppression."
+            },
+            {
+                question: "Keratoconus causes:",
+                options: [
+                    "Regular astigmatism",
+                    "Irregular astigmatism",
+                    "Spherical myopia",
+                    "Hyperopia only"
+                ],
+                correct: 1,
+                explanation: "Keratoconus: progressive corneal thinning and conical protrusion causing irregular astigmatism, not fully correctable with spectacles (requires rigid contact lenses)."
+            },
+            {
+                question: "The refractive index of the cornea is approximately:",
+                options: [
+                    "1.00 (same as air)",
+                    "1.33 (similar to water)",
+                    "1.38",
+                    "1.50"
+                ],
+                correct: 2,
+                explanation: "Refractive indices: air 1.00, cornea 1.38, aqueous 1.33, lens 1.42 (cortex) to 1.41 (nucleus), vitreous 1.34."
+            },
+            {
+                question: "The reduced eye model (Listing's eye) has a single refractive surface with power:",
+                options: [
+                    "20 D",
+                    "43 D",
+                    "60 D",
+                    "80 D"
+                ],
+                correct: 2,
+                correct: 2,
+                explanation: "Listing's reduced eye: single refractive surface 60D, located 17mm in front of retina, nodal point 7mm behind surface, simplifies optical calculations."
+            },
+            {
+                question: "Aphakia refers to:",
+                options: [
+                    "Absence of iris",
+                    "Absence of lens",
+                    "Absence of cornea",
+                    "Absence of vitreous"
+                ],
+                correct: 1,
+                explanation: "Aphakia: absence of lens (surgical removal, congenital). Causes hyperopia (~+10D), loss of accommodation, requires thick convex lenses or IOL implantation."
+            },
+            {
+                question: "The schematic eye (Gullstrand) accounts for:",
+                options: [
+                    "Single refractive surface",
+                    "Multiple refractive surfaces and media",
+                    "Only corneal refraction",
+                    "Only lens accommodation"
+                ],
+                correct: 1,
+                explanation: "Gullstrand's schematic eye: detailed model with 6 refractive surfaces (cornea anterior/posterior, lens anterior/posterior/cortex/nucleus), more accurate than reduced eye."
+            },
+
+            // Questions 36-45: Mechanisms of Accommodation
+            {
+                question: "Accommodation for near vision involves:",
+                options: [
+                    "Ciliary muscle relaxation",
+                    "Ciliary muscle contraction",
+                    "Iris sphincter contraction only",
+                    "Extraocular muscle contraction"
+                ],
+                correct: 1,
+                explanation: "Accommodation: parasympathetic (CN III) stimulation → ciliary muscle contraction → zonular relaxation → lens becomes more spherical (increased curvature)."
+            },
+            {
+                question: "The amplitude of accommodation decreases with age primarily due to:",
+                options: [
+                    "Ciliary muscle weakness",
+                    "Lens sclerosis (presbyopia)",
+                    "Zonular stiffening",
+                    "All contribute equally"
+                ],
+                correct: 1,
+                explanation: "Presbyopia mainly due to lens sclerosis (increased hardness), not ciliary muscle weakness. Accommodation decreases from ~14D (age 10) to ~2D (age 50)."
+            },
+            {
+                question: "The triad of near response includes all EXCEPT:",
+                options: [
+                    "Accommodation",
+                    "Pupillary constriction",
+                    "Convergence",
+                    "Tear production"
+                ],
+                correct: 3,
+                explanation: "Near triad: accommodation (ciliary contraction), convergence (medial recti), pupillary constriction (miosis). Coordinated via midbrain accommodation center."
+            },
+            {
+                question: "During accommodation, the lens anterior surface curvature increases more than the posterior because:",
+                options: [
+                    "Anterior capsule is thinner",
+                    "Zonules attach more anteriorly",
+                    "Vitreous pressure pushes posteriorly",
+                    "All of the above"
+                ],
+                correct: 0,
+                explanation: "Anterior capsule (15μm) is thinner than posterior (5μm), allowing greater curvature change. Anterior radius decreases from 10mm to 6mm during accommodation."
+            },
+            {
+                question: "The accommodative reflex pathway involves:",
+                options: [
+                    "Retina → LGN → visual cortex",
+                    "Retina → pretectal → Edinger-Westphal",
+                    "Retina → superior colliculus → oculomotor",
+                    "Direct retinal-ciliary connection"
+                ],
+                correct: 1,
+                explanation: "Accommodation pathway: retina → optic nerve → optic chiasm → optic tract → pretectal area → Edinger-Westphal nucleus → CN III → ciliary ganglion → ciliary muscle."
+            },
+            {
+                question: "The range of accommodation is the distance between:",
+                options: [
+                    "Far point and near point",
+                    "Pupil center and retina",
+                    "Cornea and lens",
+                    "Nodal point and fovea"
+                ],
+                correct: 0,
+                explanation: "Range of accommodation = far point to near point. Amplitude of accommodation = diopter difference between far and near points (A = 1/NP - 1/FP)."
+            },
+            {
+                question: "During accommodation, the anterior chamber depth:",
+                options: [
+                    "Increases",
+                    "Decreases",
+                    "Remains unchanged",
+                    "Becomes variable"
+                ],
+                correct: 1,
+                explanation: "Accommodation: lens thickens anteriorly, anterior chamber depth decreases by ~0.3mm, iris-lens contact increases, potentially increasing IOP temporarily."
+            },
+            {
+                question: "Pharmacological accommodation can be induced by:",
+                options: [
+                    "Atropine (muscarinic antagonist)",
+                    "Pilocarpine (muscarinic agonist)",
+                    "Phenylephrine (α-agonist)",
+                    "Timolol (β-blocker)"
+                ],
+                correct: 1,
+                explanation: "Pilocarpine stimulates M3 receptors on ciliary muscle, causing accommodation and miosis. Atropine causes cycloplegia (paralysis of accommodation) and mydriasis."
+            },
+            {
+                question: "The accommodative-convergence/accommodation (AC/A) ratio is normally:",
+                options: [
+                    "1:1 (1 prism diopter/1 diopter)",
+                    "3:1",
+                    "5:1",
+                    "10:1"
+                ],
+                correct: 1,
+                explanation: "Normal AC/A ratio = 3-5 prism diopters of convergence per diopter of accommodation. High AC/A → convergence excess esotropia; low AC/A → convergence insufficiency."
+            },
+            {
+                question: "Lens paradox refers to:",
+                options: [
+                    "Lens becomes thinner with age",
+                    "Lens refractive power decreases despite thickening",
+                    "Accommodation without ciliary action",
+                    "Lens transparency increases with age"
+                ],
+                correct: 1,
+                explanation: "Lens paradox: lens thickens with age but refractive power decreases due to gradient refractive index changes and altered surface curvatures."
+            },
+
+            // Questions 46-60: Visual Processing
+            {
+                question: "Phototransduction in rods involves:",
+                options: [
+                    "Light → 11-cis to all-trans retinal → opsin activation → PDE activation → cGMP decrease → channel closure",
+                    "Light → all-trans to 11-cis retinal → opsin inactivation → PDE inhibition → cGMP increase → channel opening",
+                    "Direct ion channel opening by photons",
+                    "G-protein independent mechanism"
+                ],
+                correct: 0,
+                explanation: "Phototransduction: light converts 11-cis to all-trans retinal → opsin activation → transducin (Gt) activation → PDE activation → cGMP hydrolysis → Na+ channels close → hyperpolarization."
+            },
+            {
+                question: "In the dark, photoreceptors are:",
+                options: [
+                    "Hyperpolarized",
+                    "Depolarized",
+                    "At resting potential",
+                    "Constantly firing"
+                ],
+                correct: 1,
+                explanation: "Dark current: cGMP-gated Na+ channels open → Na+ influx (dark current) → depolarization (~-40 mV) → glutamate release. Light closes channels → hyperpolarization → decreased glutamate."
+            },
+            {
+                question: "Center-surround receptive fields are characteristic of:",
+                options: [
+                    "Photoreceptors",
+                    "Bipolar cells",
+                    "Retinal ganglion cells",
+                    "LGN neurons"
+                ],
+                correct: 2,
+                explanation: "Retinal ganglion cells have concentric center-surround antagonistic receptive fields due to lateral inhibition via horizontal cells, enhancing edge detection."
+            },
+            {
+                question: "M-type retinal ganglion cells are characterized by:",
+                options: [
+                    "Small receptive fields, color-opponent, slow conduction",
+                    "Large receptive fields, transient response, fast conduction",
+                    "Photosensitive, project to SCN",
+                    "Local circuit neurons only"
+                ],
+                correct: 1,
+                explanation: "M-cells (magnocellular): large receptive fields, transient response, fast conduction (Y-type), motion detection, project to layers 1-2 of LGN."
+            },
+            {
+                question: "P-type retinal ganglion cells are characterized by:",
+                options: [
+                    "Large receptive fields, motion sensitivity",
+                    "Small receptive fields, sustained response, color-opponent",
+                    "Intrinsic photosensitivity",
+                    "Non-visual projections only"
+                ],
+                correct: 1,
+                explanation: "P-cells (parvocellular): small receptive fields, sustained response, slow conduction (X-type), color-opponent (red/green), high acuity, project to layers 3-6 of LGN."
+            },
+            {
+                question: "The lateral geniculate nucleus (LGN) has ___ layers in primates:",
+                options: [
+                    "2 (magno and parvo)",
+                    "4",
+                    "6",
+                    "8"
+                ],
+                correct: 2,
+                explanation: "Primate LGN: 6 layers (1-2 magnocellular, 3-6 parvocellular), with contralateral eye inputs to layers 1,4,6 and ipsilateral to 2,3,5."
+            },
+            {
+                question: "Visual field representation in primary visual cortex (V1) is:",
+                options: [
+                    "Retinotopic",
+                    "Random",
+                    "Based on color only",
+                    "Based on motion only"
+                ],
+                correct: 0,
+                explanation: "V1 has precise retinotopic map: fovea represented posteriorly (large area), periphery anteriorly (small area) - cortical magnification factor."
+            },
+            {
+                question: "Ocular dominance columns in V1 refer to:",
+                options: [
+                    "Alternating columns receiving input from left or right eye",
+                    "Columns for different colors",
+                    "Columns for different orientations",
+                    "Motion-sensitive columns"
+                ],
+                correct: 0,
+                explanation: "Ocular dominance columns: alternating ~0.5mm wide columns in layer 4C of V1 receiving monocular input from either left or right eye via LGN."
+            },
+            {
+                question: "Simple cells in V1 respond best to:",
+                options: [
+                    "Diffuse light",
+                    "Specific oriented bars or edges",
+                    "Any moving stimulus",
+                    "Color only"
+                ],
+                correct: 1,
+                explanation: "Simple cells (mainly layer 4): oriented elongated receptive fields with distinct ON/OFF regions, respond to specific edge orientation at specific location."
+            },
+            {
+                question: "Complex cells in V1 respond best to:",
+                options: [
+                    "Specific oriented edges anywhere in receptive field",
+                    "Only centered oriented edges",
+                    "Color regardless of orientation",
+                    "Any light stimulus"
+                ],
+                correct: 0,
+                explanation: "Complex cells (layers 2,3,5,6): respond to specific orientation but position-independent, motion-sensitive, receive input from multiple simple cells."
+            },
+            {
+                question: "The dorsal visual stream is often called the:",
+                options: [
+                    "'What' pathway",
+                    "'Where' pathway",
+                    "'Color' pathway",
+                    "'Face recognition' pathway"
+                ],
+                correct: 1,
+                explanation: "Dorsal stream (V1 → V2 → MT → parietal): 'where/how' pathway, spatial location, motion, guidance of action. Ventral stream: 'what' pathway, object recognition."
+            },
+            {
+                question: "The ventral visual stream projects to the:",
+                options: [
+                    "Parietal cortex",
+                    "Temporal cortex",
+                    "Frontal cortex",
+                    "Cerebellum"
+                ],
+                correct: 1,
+                explanation: "Ventral stream (V1 → V2 → V4 → IT): temporal lobe, object recognition, form, color, faces. Damage causes visual agnosia."
+            },
+            {
+                question: "Area MT (V5) is specialized for processing:",
+                options: [
+                    "Color",
+                    "Form",
+                    "Motion",
+                    "Faces"
+                ],
+                correct: 2,
+                explanation: "MT (middle temporal area/V5): motion processing, direction-selective cells. Damage causes akinetopsia (motion blindness)."
+            },
+            {
+                question: "Area V4 is important for:",
+                options: [
+                    "Motion processing only",
+                    "Color and form processing",
+                    "Saccade generation",
+                    "Stereopsis only"
+                ],
+                correct: 1,
+                explanation: "V4: color constancy, form processing, attention. Damage causes cerebral achromatopsia (color blindness) with preserved motion detection."
+            },
+            {
+                question: "Parallel processing in visual system refers to:",
+                options: [
+                    "Sequential processing through hierarchy",
+                    "Simultaneous processing of different attributes",
+                    "Single pathway for all information",
+                    "Processing only in retina"
+                ],
+                correct: 1,
+                explanation: "Parallel processing: different attributes (motion, color, form, depth) processed simultaneously in separate but interconnected pathways from retina to cortex."
+            },
+
+            // Questions 61-70: Clinical Defects
+            {
+                question: "Glaucoma primarily affects:",
+                options: [
+                    "Corneal transparency",
+                    "Lens accommodation",
+                    "Retinal ganglion cells",
+                    "Choroidal blood flow"
+                ],
+                correct: 2,
+                explanation: "Glaucoma: progressive optic neuropathy with characteristic cupping, primarily affecting retinal ganglion cell axons at optic nerve head, often associated with elevated IOP."
+            },
+            {
+                question: "Open-angle glaucoma is characterized by:",
+                options: [
+                    "Normal anterior chamber angle",
+                    "Closed anterior chamber angle",
+                    "Iris bombe",
+                    "Acute pain and redness"
+                ],
+                correct: 0,
+                explanation: "Open-angle glaucoma (90%): normal appearing angle, chronic progressive, asymptomatic until late. Closed-angle: acute (painful) or chronic, with narrow angle."
+            },
+            {
+                question: "Cataract refers to:",
+                options: [
+                    "Corneal opacity",
+                    "Lens opacity",
+                    "Vitreous opacity",
+                    "Retinal degeneration"
+                ],
+                correct: 1,
+                explanation: "Cataract: lens opacity causing decreased vision. Types: nuclear (aging), cortical, posterior subcapsular. Treatment: phacoemulsification with IOL implantation."
+            },
+            {
+                question: "Age-related macular degeneration (AMD) primarily affects:",
+                options: [
+                    "Peripheral retina",
+                    "Macula (central retina)",
+                    "Optic nerve",
+                    "Cornea"
+                ],
+                correct: 1,
+                explanation: "AMD: leading cause of central vision loss in elderly. Dry (85%, drusen, RPE atrophy) and wet (15%, choroidal neovascularization)."
+            },
+            {
+                question: "Diabetic retinopathy features include all EXCEPT:",
+                options: [
+                    "Microaneurysms",
+                    "Neovascularization",
+                    "Macular edema",
+                    "Corneal ulcers"
+                ],
+                correct: 3,
+                correct: 3,
+                explanation: "Diabetic retinopathy: microaneurysms, hemorrhages, cotton-wool spots, neovascularization, macular edema. Corneal ulcers are not typical."
+            },
+            {
+                question: "Retinitis pigmentosa typically presents with:",
+                options: [
+                    "Central scotoma",
+                    "Peripheral visual field loss (tunnel vision)",
+                    "Complete blindness at onset",
+                    "Color vision loss only"
+                ],
+                correct: 1,
+                explanation: "Retinitis pigmentosa: rod-cone dystrophy, night blindness, peripheral field loss (tunnel vision), bone spicule pigmentation, eventually central vision loss."
+            },
+            {
+                question: "Amblyopia (lazy eye) results from:",
+                options: [
+                    "Organic eye disease",
+                    "Abnormal visual experience during critical period",
+                    "Cortical blindness",
+                    "Optic nerve inflammation"
+                ],
+                correct: 1,
+                explanation: "Amblyopia: decreased vision despite normal anatomy, due to form deprivation (cataract), strabismus, or anisometropia during visual development (critical period <7-8 years)."
+            },
+            {
+                question: "Scotoma refers to:",
+                options: [
+                    "Generalized visual loss",
+                    "Localized visual field defect",
+                    "Color vision deficiency",
+                    "Night blindness"
+                ],
+                correct: 1,
+                explanation: "Scotoma: localized area of vision loss. Central scotoma (macular disease), arcuate (glaucoma), hemianopic (retrochiasmal lesions)."
+            },
+            {
+                question: "Nyctalopia (night blindness) is characteristic of:",
+                options: [
+                    "Cone dystrophies",
+                    "Rod dystrophies or vitamin A deficiency",
+                    "Macular degeneration",
+                    "Optic neuritis"
+                ],
+                correct: 1,
+                explanation: "Nyctalopia: impaired dark adaptation, characteristic of rod dysfunction (retinitis pigmentosa, vitamin A deficiency). Cones function in photopic (bright) conditions."
+            },
+            {
+                question: "The Argyll Robertson pupil shows:",
+                options: [
+                    "Light-near dissociation",
+                    "Complete paralysis",
+                    "Dilation only",
+                    "Constriction only"
+                ],
+                correct: 0,
+                explanation: "Argyll Robertson pupil: small, irregular, accommodates but doesn't react to light (light-near dissociation), classic for neurosyphilis, due to damage to pretectal light pathway."
+            }
+        ];
+
+        // Function to shuffle array (Fisher-Yates algorithm)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Initialize the quiz
+        document.addEventListener('DOMContentLoaded', function() {
+            const questionsSection = document.getElementById('questions-section');
+            const answerSection = document.getElementById('answer-section');
+            const answerBank = document.getElementById('answer-bank');
+            const submitBtn = document.getElementById('submit-btn');
+            const resetBtn = document.getElementById('reset-btn');
+            const resultsSection = document.getElementById('results-section');
+            const scoreValue = document.getElementById('score-value');
+            const attemptedValue = document.getElementById('attempted-value');
+            const passedValue = document.getElementById('passed-value');
+            const failedValue = document.getElementById('failed-value');
+            const detailedAnswers = document.getElementById('detailed-answers');
+            const progressBar = document.getElementById('progress-bar');
+            
+            let userAnswers = Array(quizData.length).fill(null);
+            
+            // Create question elements with shuffled answer options
+            quizData.forEach((questionData, index) => {
+                const questionElement = document.createElement('div');
+                questionElement.className = 'question';
+                
+                // Shuffle the options but remember correct answer position
+                const optionsWithIndices = questionData.options.map((option, i) => ({ option, originalIndex: i }));
+                const shuffledOptions = shuffleArray([...optionsWithIndices]);
+                const correctAnswerNewIndex = shuffledOptions.findIndex(item => item.originalIndex === questionData.correct);
+                
+                // Store the new correct index in the question data
+                questionData.shuffledCorrect = correctAnswerNewIndex;
+                
+                // Add category-specific notes
+                let categoryNote = '';
+                if (index < 20) { // Eye structure
+                    categoryNote = `<div class="anatomy-note">Eye Structure: This question covers anatomical components, layers, and specialized regions of the eye.</div>`;
+                } else if (index < 35) { // Refraction
+                    categoryNote = `<div class="refraction-note">Refraction & Errors: This question covers optical principles, refractive errors, and their correction.</div>`;
+                } else if (index < 45) { // Accommodation
+                    categoryNote = `<div class="accommodation-note">Accommodation: This question covers mechanisms of focusing, near response, and age-related changes.</div>`;
+                } else if (index < 60) { // Visual processing
+                    categoryNote = `<div class="processing-note">Visual Processing: This question covers phototransduction, retinal processing, and cortical pathways.</div>`;
+                } else { // Clinical defects
+                    categoryNote = `<div class="clinical-note">Clinical Defects: This question covers common ocular diseases, their pathology, and clinical features.</div>`;
+                }
+                
+                questionElement.innerHTML = `
+                    <div class="question-number">${index + 1}</div>
+                    <div class="question-text">${questionData.question}</div>
+                    ${categoryNote}
+                    <div class="options">
+                        ${shuffledOptions.map((item, optionIndex) => `
+                            <div class="option" data-question="${index}" data-option="${optionIndex}" data-original="${item.originalIndex}" data-letter="${String.fromCharCode(65 + optionIndex)}">
+                                <div class="option-content">${item.option}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                questionsSection.appendChild(questionElement);
+                
+                // Create answer element for answer bank
+                const answerElement = document.createElement('div');
+                answerElement.className = 'answer-item';
+                answerElement.innerHTML = `
+                    <strong>${index + 1}. ${questionData.question}</strong><br>
+                    <span class="answer-correct">Correct: ${String.fromCharCode(65 + questionData.correct)}. ${questionData.options[questionData.correct]}</span>
+                `;
+                answerBank.appendChild(answerElement);
+            });
+            
+            // Update progress bar
+            function updateProgress() {
+                const answered = userAnswers.filter(answer => answer !== null).length;
+                const progress = (answered / quizData.length) * 100;
+                progressBar.style.width = `${progress}%`;
+            }
+            
+            // Add event listeners to options
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const questionIndex = parseInt(this.getAttribute('data-question'));
+                    const optionIndex = parseInt(this.getAttribute('data-option'));
+                    
+                    // Remove selected class from all options in this question
+                    const questionOptions = document.querySelectorAll(`.option[data-question="${questionIndex}"]`);
+                    questionOptions.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    
+                    // Store user's answer
+                    userAnswers[questionIndex] = optionIndex;
+                    
+                    // Update progress
+                    updateProgress();
+                });
+            });
+            
+            // Submit button event listener
+            submitBtn.addEventListener('click', function() {
+                let score = 0;
+                let attempted = 0;
+                let passed = 0;
+                let failed = 0;
+                
+                // Clear previous detailed answers
+                detailedAnswers.innerHTML = '';
+                
+                // Evaluate answers
+                quizData.forEach((questionData, index) => {
+                    const userAnswer = userAnswers[index];
+                    const correctAnswer = questionData.shuffledCorrect;
+                    const questionOptions = document.querySelectorAll(`.option[data-question="${index}"]`);
+                    
+                    if (userAnswer !== null) {
+                        attempted++;
+                        
+                        // Mark correct/incorrect answers
+                        questionOptions.forEach((option, optionIndex) => {
+                            if (optionIndex === correctAnswer) {
+                                option.classList.add('correct');
+                            } else if (optionIndex === userAnswer && userAnswer !== correctAnswer) {
+                                option.classList.add('incorrect');
+                            }
+                        });
+                        
+                        if (userAnswer === correctAnswer) {
+                            score++;
+                            passed++;
+                        } else {
+                            failed++;
+                        }
+                        
+                        // Get the original letter for the user's answer
+                        const userOptionElement = document.querySelector(`.option[data-question="${index}"][data-option="${userAnswer}"]`);
+                        const userOriginalIndex = userOptionElement ? parseInt(userOptionElement.getAttribute('data-original')) : null;
+                        const userAnswerLetter = userOriginalIndex !== null ? String.fromCharCode(65 + userOriginalIndex) : '?';
+                        const userAnswerText = userOptionElement ? userOptionElement.querySelector('.option-content').textContent : 'Not selected';
+                        
+                        // Create detailed answer element
+                        const detailedAnswer = document.createElement('div');
+                        detailedAnswer.className = 'answer-item';
+                        const userAnswerClass = userAnswer === correctAnswer ? 'answer-correct' : 'answer-incorrect';
+                        detailedAnswer.innerHTML = `
+                            <strong>${index + 1}. ${questionData.question}</strong><br>
+                            <span class="${userAnswerClass}">Your answer: ${userAnswerLetter}. ${userAnswerText}</span><br>
+                            <span class="answer-correct">Correct: ${String.fromCharCode(65 + questionData.correct)}. ${questionData.options[questionData.correct]}</span><br>
+                            <div class="clinical-note">${questionData.explanation}</div>
+                        `;
+                        detailedAnswers.appendChild(detailedAnswer);
+                    } else {
+                        // Create detailed answer for unattempted question
+                        const detailedAnswer = document.createElement('div');
+                        detailedAnswer.className = 'answer-item';
+                        detailedAnswer.innerHTML = `
+                            <strong>${index + 1}. ${questionData.question}</strong><br>
+                            <span class="answer-incorrect">Your answer: Not attempted</span><br>
+                            <span class="answer-correct">Correct: ${String.fromCharCode(65 + questionData.correct)}. ${questionData.options[questionData.correct]}</span><br>
+                            <div class="clinical-note">${questionData.explanation}</div>
+                        `;
+                        detailedAnswers.appendChild(detailedAnswer);
+                    }
+                });
+                
+                // Update score and stats
+                scoreValue.textContent = `${score}/${quizData.length}`;
+                attemptedValue.textContent = attempted;
+                passedValue.textContent = passed;
+                failedValue.textContent = failed;
+                
+                // Show results section and answer section
+                resultsSection.style.display = 'block';
+                answerSection.classList.add('visible');
+                
+                // Scroll to results
+                resultsSection.scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Reset button event listener
+            resetBtn.addEventListener('click', function() {
+                userAnswers = Array(quizData.length).fill(null);
+                
+                // Clear all selections
+                document.querySelectorAll('.option').forEach(option => {
+                    option.classList.remove('selected', 'correct', 'incorrect');
+                });
+                
+                // Hide results section and answer section
+                resultsSection.style.display = 'none';
+                answerSection.classList.remove('visible');
+                
+                // Reset progress bar
+                progressBar.style.width = '0%';
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
